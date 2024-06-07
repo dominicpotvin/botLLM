@@ -1,34 +1,23 @@
-// Fonction pour envoyer un message
-function sendMessage() {
-  const messageInput = document.getElementById("message-input");
-  const messageText = messageInput.value;
+document.getElementById("send-button").addEventListener("click", function () {
+  var userInput = document.getElementById("user-input").value;
+  fetch("/message", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: "message=" + encodeURIComponent(userInput),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      var chatBox = document.getElementById("chat-box");
+      chatBox.innerHTML += '<div class="user-message">' + userInput + "</div>";
+      chatBox.innerHTML +=
+        '<div class="bot-response">' + data.response + "</div>";
+      document.getElementById("user-input").value = "";
+    });
+});
 
-  if (messageText.trim()) {
-    const messageContainer = document.getElementById("messages-container");
-
-    // Créez un élément HTML pour le message de l'utilisateur
-    const userMessage = document.createElement("div");
-    userMessage.classList.add("message", "user");
-    userMessage.textContent = messageText;
-
-    // Ajoutez le message à la fenêtre de discussion
-    messageContainer.appendChild(userMessage);
-
-    // Envoyez le message au bot (via AJAX ou WebSocket, par exemple)
-    // ...
-
-    // Videz le champ de saisie
-    messageInput.value = "";
-  }
-}
-
-// Écoutez l'événement clic sur le bouton d'envoi
-const sendButton = document.getElementById("send-button");
-sendButton.addEventListener("click", sendMessage);
-
-// (Optionnel) Écoutez l'appui sur la touche Entrée pour envoyer un message
-document.addEventListener("keypress", function (event) {
-  if (event.key === "Enter") {
-    sendMessage();
-  }
+document.getElementById("clear-button").addEventListener("click", function () {
+  document.getElementById("chat-box").innerHTML = "";
+  document.getElementById("user-input").value = "";
 });

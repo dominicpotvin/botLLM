@@ -1,50 +1,103 @@
-/* Styles CSS pour l'interface du chatbot */
+/* Style général */
 body {
-  font-family: sans-serif;
-}
-
-.container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.chat-container {
-  border: 1px solid #ccc;
-  padding: 20px;
-}
-
-.messages {
-  height: 300px;
-  overflow-y: scroll;
-}
-
-.message {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.message.user {
-  background-color: #f0f0f0;
-}
-
-.message.bot {
-  background-color: #e0e0e0;
-}
-
-.input-container {
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f9;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
-#message-input {
+/* Conteneur du chat */
+#chat-container {
+  width: 500px; /* Augmenter la largeur pour élargir la fenêtre du chat */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Boîte de chat */
+#chat-box {
+  height: 400px; /* Augmenter la hauteur pour plus d'espace de chat */
+  overflow-y: auto;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Messages de l'utilisateur */
+.user-message {
+  text-align: right;
+  color: #fff;
+  background-color: #007bff;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  max-width: 80%;
+}
+
+/* Réponses du bot */
+.bot-response {
+  text-align: left;
+  color: #333;
+  background-color: #e9ecef;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  max-width: 80%;
+}
+
+/* Conteneur de saisie */
+#input-container {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  align-items: center;
+  gap: 10px; /* Ajouter un espacement entre les éléments */
+}
+
+/* Champ de saisie */
+#user-input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
+/* Bouton d'envoi */
 #send-button {
-  padding: 10px;
+  padding: 10px 20px;
   border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#send-button:hover {
+  background-color: #0056b3;
+}
+
+/* Bouton nettoyer */
+#clear-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #dc3545;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#clear-button:hover {
+  background-color: #c82333;
 }

@@ -9,6 +9,15 @@ from bot import traiter_message  # Importez la fonction depuis bot.py
 
 app = Flask(__name__)
 
+# Définir le chemin relatif vers promptSystem.txt
+prompt_system_path = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../../promptSystem.txt")
+)
+
+# Lire le fichier promptSystem.txt
+with open(prompt_system_path, "r") as file:
+    system_prompt = file.read().strip()
+
 
 # Route pour la page d'accueil du chatbot
 @app.route("/", methods=["GET"])
@@ -26,6 +35,14 @@ def message():
 
         # Traiter le message en utilisant la fonction de bot.py
         response = traiter_message(user_message)
+
+        # Personnaliser la réponse en utilisant le prompt système
+        if (
+            "ton nom" in user_message.lower()
+            or "comment tu t'appelles" in user_message.lower()
+        ):
+            response = system_prompt
+
         print(f"Réponse générée : {response}")
 
         # Renvoie la réponse au format JSON

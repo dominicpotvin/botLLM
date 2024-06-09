@@ -1,6 +1,4 @@
 from flask import Flask, render_template, request, jsonify
-import re
-import requests
 import sys
 import os
 
@@ -21,14 +19,20 @@ def index():
 # Route pour traiter les messages envoyés par l'utilisateur
 @app.route("/message", methods=["POST"])
 def message():
-    # Récupérer le message envoyé par l'utilisateur
-    user_message = request.form.get("message")
+    try:
+        # Récupérer le message envoyé par l'utilisateur
+        user_message = request.form.get("message")
+        print(f"Message reçu : {user_message}")
 
-    # Traiter le message en utilisant la fonction de bot.py
-    response = traiter_message(user_message)
+        # Traiter le message en utilisant la fonction de bot.py
+        response = traiter_message(user_message)
+        print(f"Réponse générée : {response}")
 
-    # Renvoie la réponse au format JSON
-    return jsonify({"response": response})
+        # Renvoie la réponse au format JSON
+        return jsonify({"response": response})
+    except Exception as e:
+        print(f"Erreur : {str(e)}")
+        return jsonify({"response": f"Erreur interne : {str(e)}"}), 500
 
 
 if __name__ == "__main__":

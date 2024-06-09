@@ -1,31 +1,56 @@
-# Importez les bibliothèques nécessaires
-import re
-import requests
+import os
+import openai
+from dotenv import load_dotenv
+
+# Charger les variables d'environnement à partir du fichier config.env
+load_dotenv(
+    "/mnt/d/Projects/chatBot/config.env"
+)  # Remplacez par le chemin réel vers config.env
+
+# Définir la clé API OpenAI à partir des variables d'environnement
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-# Définissez des fonctions pour traiter les messages de l'utilisateur
 def traiter_message(message):
-    # Effectuez un traitement du langage naturel basique (optionnel)
-    message = message.lower()
-    message = re.sub(r"[^\w\s]", "", message)
+    try:
+        # Utiliser l'API OpenAI pour générer une réponse avec GPT-4
+        response = openai.ChatCompletion.create(
+            model="gpt-4",  # Spécifiez le modèle GPT-4
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": message},
+            ],
+            max_tokens=150,
+        )
+        return response.choices[0].message["content"].strip()
+    except Exception as e:
+        return f"Error: {str(e)}"
 
-    # Répondez au message de l'utilisateur en fonction de sa logique conversationnelle
-    if message == "bonjour":
-        return "Bonjour à vous !"
-    elif message == "comment vas-tu ?":
-        return "Je vais bien, merci ! Et vous ?"
-    else:
-        return "Je ne comprends pas bien votre message."
+
+import os
+import openai
+from dotenv import load_dotenv
+
+# Charger les variables d'environnement à partir du fichier config.env
+load_dotenv(
+    "/mnt/d/Projects/chatBot/config.env"
+)  # Remplacez par le chemin réel vers config.env
+
+# Définir la clé API OpenAI à partir des variables d'environnement
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-# Commentez la boucle principale pour permettre l'importation sans exécution
-# Boucle principale
-# while True:
-#     # Recevez le message de l'utilisateur
-#     message_utilisateur = input("Utilisateur : ")
-#
-#     # Traitez le message de l'utilisateur
-#     reponse_bot = traiter_message(message_utilisateur)
-#
-#     # Affichez la réponse du bot
-#     print(f"Bot : {reponse_bot}")
+def traiter_message(message):
+    try:
+        # Utiliser l'API OpenAI pour générer une réponse avec GPT-4
+        response = openai.ChatCompletion.create(
+            model="gpt-4",  # Spécifiez le modèle GPT-4
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": message},
+            ],
+            max_tokens=150,
+        )
+        return response.choices[0].message["content"].strip()
+    except Exception as e:
+        return f"Error: {str(e)}"

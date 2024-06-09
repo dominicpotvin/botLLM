@@ -2,6 +2,7 @@
 import re
 import requests
 
+
 # Définissez des fonctions pour traiter les messages de l'utilisateur
 def traiter_message(message):
     # Effectuez un traitement du langage naturel basique (optionnel)
@@ -16,13 +17,15 @@ def traiter_message(message):
     else:
         return "Je ne comprends pas bien votre message."
 
+
+# Commentez la boucle principale pour permettre l'importation sans exécution
 # Boucle principale
-while True:
-    # Recevez le message de l'utilisateur
-    message_utilisateur = input("Utilisateur : ")
-
-    # Traitez le message de l'utilisateur
-    reponse_bot = traiter_message(message_utilisateur)
-
-    # Affichez la réponse du bot
-    print(f"Bot : {reponse_bot}")
+# while True:
+#     # Recevez le message de l'utilisateur
+#     message_utilisateur = input("Utilisateur : ")
+#
+#     # Traitez le message de l'utilisateur
+#     reponse_bot = traiter_message(message_utilisateur)
+#
+#     # Affichez la réponse du bot
+#     print(f"Bot : {reponse_bot}")

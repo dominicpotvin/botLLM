@@ -1,3 +1,4 @@
 # Définissez les dépendances Python requises
-flask==2.2.x
-requests==2.28.x
+flask==2.2.5
+requests==2.28.1
+
